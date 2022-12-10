@@ -37,3 +37,9 @@ module "security_groups" {
   vpc_id                      = module.vpc.vpc_id
 }
 
+# create ecs task execution role
+module "ecs_task_execution_role" {
+  source        = "../modules/ecs_task_execution_role"
+  project_name  = module.vpc.project_name
+}
+
