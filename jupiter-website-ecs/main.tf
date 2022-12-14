@@ -81,3 +81,16 @@ module "asg" {
   ecs_service_name = module.ecs.ecs_service_name  
 }
 
+# create route 53 reccord
+module "route53" {
+  source        = "../modules/route53"
+  domain_name   = module.acm.domain_name
+  reccord_name  = var.reccord_name
+  alb_dns_name  = module.alb.alb_dns_name
+  alb_zone_id   = module.alb.alb_zone_id 
+}
+
+output "website_url" {
+  value = join ("", ["https://", var.reccord_name, ".", var.domain_name] )
+}
+
